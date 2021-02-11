@@ -4,7 +4,9 @@
     https://api.github.com/users/<your name>
 */
 import axios from 'axios'
-const data = axios.get('https://api.github.com/users/Randyo28')
+const data = axios.get('https://api.github.com/users/Randyo28').then(res => {
+  cards.append(githubUser(res))
+})
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -19,7 +21,7 @@ console.log(axios.get('https://api.github.com/users/Randyo28'))
 */
 const cards = document.querySelector('.cards')
 
-cards.append(githubUser({data}))
+// cards.append(githubUser({data}))
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
