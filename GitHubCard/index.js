@@ -55,6 +55,8 @@ followers('dustinmyers')
 followers('justsml')
 followers('luishrd')
 followers('bigknell')
+followers('codingphasedotcom')
+followers('bradtraversy')
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
