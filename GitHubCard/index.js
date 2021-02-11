@@ -3,7 +3,8 @@
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-
+import axios from 'axios'
+const data = axios.get('https://api.github.com/users/Randyo28')
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -11,11 +12,14 @@
 
     Skip to STEP 3.
 */
-
+console.log(axios.get('https://api.github.com/users/Randyo28'))
 /*
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
+const cards = document.querySelector('.cards')
+
+cards.append(githubUser({data}))
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -50,6 +54,53 @@ const followersArray = [];
     </div>
 */
 
+
+function githubUser({data}){
+  //create elements
+  const divCard = document.createElement('div')
+  const img = document.createElement('img')
+  const divInfo = document.createElement('div')
+  const h3Name = document.createElement('h3')
+  const userName = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const addressLink = document.createElement('a')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+
+  //Give classNames
+  divCard.className = 'card'
+  divInfo.className = 'card-info'
+  h3Name.className = 'name'
+  userName.className = 'username'
+
+  //text-content
+  img.setAttribute('src', `${data.avatar_url}`)
+  h3Name.textContent = `${data.name}`
+  userName.textContent = `${data.login}`
+  location.textContent = `${data.location}`
+  addressLink.setAttribute('href', `${data.html_url}`)
+  addressLink.textContent = `${data.html_url}`
+  followers.textContent = `${data.followers}`
+  following.textContent = `${data.following}`
+  bio.textContent = `${data.bio}`
+
+  //appending elements
+  // cards.append(divCard)
+  divCard.append(img)
+  divCard.append(divInfo)
+  divInfo.append(h3Name)
+  divInfo.append(userName)
+  divInfo.append(location)
+  divInfo.append(profile)
+  profile.append(addressLink)
+  divInfo.append(followers)
+  divInfo.append(following)
+
+  return divCard
+}
+ console.log(githubUser(data))
 /*
   List of LS Instructors Github username's:
     tetondan
