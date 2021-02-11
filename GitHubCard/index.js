@@ -7,6 +7,8 @@ import axios from 'axios'
 const data = axios.get('https://api.github.com/users/Randyo28').then(res => {
   cards.append(githubUser(res))
 })
+.catch(err =>
+  console.log(err))
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -34,7 +36,25 @@ const cards = document.querySelector('.cards')
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan','dustinmyers','justsml',
+  'luishrd',
+  'bigknell'
+];
+
+
+function followers(names){
+axios.get(`https://api.github.com/users/${names}`).then(res => {
+  cards.append(githubUser(res))
+})
+.catch(err => {
+  console.log(err)
+})
+}
+followers('tetondan')
+followers('dustinmyers')
+followers('justsml')
+followers('luishrd')
+followers('bigknell')
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
