@@ -16,7 +16,7 @@ const data = axios.get('https://api.github.com/users/Randyo28').then(res => {
 
     Skip to STEP 3.
 */
-console.log(axios.get('https://api.github.com/users/Randyo28'))
+// console.log(data)
 /*
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
@@ -38,25 +38,27 @@ const cards = document.querySelector('.cards')
 
 const followersArray = ['tetondan','dustinmyers','justsml',
   'luishrd',
-  'bigknell'
+  'bigknell', "codingphasedotcom",
+  'bradtraversy'
 ];
 
+followersArray.forEach(user => {
+  axios.get(`https://api.github.com/users/${user}`).then(res => {
+      cards.append(githubUser(res))
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+console.log(axios.get('https://api.github.com/users/Randyo28'))
 
-function followers(names){
-axios.get(`https://api.github.com/users/${names}`).then(res => {
-  cards.append(githubUser(res))
-})
-.catch(err => {
-  console.log(err)
-})
-}
-followers('tetondan')
-followers('dustinmyers')
-followers('justsml')
-followers('luishrd')
-followers('bigknell')
-followers('codingphasedotcom')
-followers('bradtraversy')
+// followers('tetondan')
+// followers('dustinmyers')
+// followers('justsml')
+// followers('luishrd')
+// followers('bigknell')
+// followers('codingphasedotcom')
+// followers('bradtraversy')
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -103,11 +105,11 @@ function githubUser({data}){
   img.setAttribute('src', `${data.avatar_url}`)
   h3Name.textContent = `${data.name}`
   userName.textContent = `${data.login}`
-  location.textContent = `${data.location}`
+  location.textContent = `Location: ${data.location}`
   addressLink.setAttribute('href', `${data.html_url}`)
-  addressLink.textContent = `${data.html_url}`
-  followers.textContent = `${data.followers}`
-  following.textContent = `${data.following}`
+  addressLink.textContent = `Github-URL: ${data.html_url}`
+  followers.textContent = `Followers: ${data.followers}`
+  following.textContent = `Following: ${data.following}`
   bio.textContent = `${data.bio}`
 
   //appending elements
@@ -124,7 +126,7 @@ function githubUser({data}){
 
   return divCard
 }
- console.log(githubUser(data))
+  console.log(githubUser({data}))
 /*
   List of LS Instructors Github username's:
     tetondan
